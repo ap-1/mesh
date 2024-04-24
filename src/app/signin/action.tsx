@@ -22,7 +22,7 @@ export async function action(values: Schema): Promise<ActionResult> {
 
 	const existingUser = existingUsers[0];
 
-	// Potentially don't use argon2.verify() because we want to always hash the password
+	// Potentially don't use bcrypt.compare() because we want to always hash the password
 	// Attackers would otherwise use the timing to determine whether a user exists
 	if (!(await bcrypt.compare(values.password, existingUser.hashedPassword))) {
 		throw new Error("Invalid username or password");

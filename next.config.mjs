@@ -1,5 +1,5 @@
 import MillionLint from "@million/lint";
-import million from "million/compiler";
+// import million from "million/compiler";
 
 import { fileURLToPath } from "url";
 import createJiti from "jiti";
