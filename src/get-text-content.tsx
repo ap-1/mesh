@@ -2,6 +2,10 @@ import { OpenAI } from "openai";
 import { createAI, getMutableAIState, render } from "ai/rsc";
 import { env } from "@/env";
 
+import { generateIdFromEntropySize } from "lucia";
+import { validateRequest } from "@/auth/validate-request";
+import { createImage } from "@/db/adapter";
+
 import { LoaderCircleIcon } from "lucide-react";
 
 const openai = new OpenAI({
@@ -30,7 +34,15 @@ const initialUIState: UIStateItem = null!;
 async function getTextContent(base64_image: string): Promise<UIStateItem> {
 	"use server";
 
+	const { user } = await validateRequest();
 	const aiState = getMutableAIState<typeof AI>();
+
+	if (!user) {
+		return {
+			id: Date.now(),
+			display: <p> Not authenticated</p>,
+		};
+	}
 
 	aiState.update([
 		{
@@ -52,7 +64,7 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 		model: "gpt-4-turbo",
 		provider: openai,
 		messages: [...aiState.get()],
-		text: ({ content, done }) => {
+		text: async ({ content, done }) => {
 			if (done) {
 				aiState.done([
 					...aiState.get(),
@@ -61,6 +73,14 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 						content,
 					},
 				]);
+
+				const imageId = generateIdFromEntropySize(16);
+				await createImage({
+					id: imageId,
+					userId: user.id,
+					text: content,
+					url: base64_image,
+				});
 			}
 
 			const words = content.split(" ");
