@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import argon2 from "argon2";
+import bcrypt from "bcryptjs";
 import { generateIdFromEntropySize } from "lucia";
 import { getUserByUsername, createUser } from "@/db/adapter";
 import { lucia } from "@/auth";
@@ -15,7 +15,7 @@ interface ActionResult {
 }
 
 export async function action(values: Schema): Promise<ActionResult> {
-	const hashedPassword = await argon2.hash(values.password);
+	const hashedPassword = await bcrypt.hash(values.password, 12);
 	const userId = generateIdFromEntropySize(16);
 
 	const existingUsers = await getUserByUsername(values.username);

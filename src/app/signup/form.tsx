@@ -29,8 +29,8 @@ const schema = z.object({
 	password: z
 		.string()
 		.min(8, { message: "Password must be at least 8 characters" })
-		.max(255, {
-			message: "Password may not be longer than 255 characters",
+		.max(64, {
+			message: "Password may not be longer than 64 characters",
 		}),
 });
 

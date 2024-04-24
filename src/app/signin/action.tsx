@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import argon2 from "argon2";
+import bcrypt from "bcryptjs";
 import { getUserByUsername } from "@/db/adapter";
 import { lucia } from "@/auth";
 
@@ -24,7 +24,7 @@ export async function action(values: Schema): Promise<ActionResult> {
 
 	// Potentially don't use argon2.verify() because we want to always hash the password
 	// Attackers would otherwise use the timing to determine whether a user exists
-	if (!(await argon2.verify(existingUser.hashedPassword, values.password))) {
+	if (!(await bcrypt.compare(values.password, existingUser.hashedPassword))) {
 		throw new Error("Invalid username or password");
 	}
 
