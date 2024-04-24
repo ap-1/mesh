@@ -18,4 +18,7 @@ const millionConfig = {
 
 export default MillionLint.next({
 	rsc: true,
-})(million.next(nextConfig, millionConfig));
+})(nextConfig, millionConfig);
+
+// Running both Million Lint and million breaks ai/rsc
+// (million.next(nextConfig, millionConfig));
