@@ -17,7 +17,9 @@ export async function action(values: Schema): Promise<ActionResult> {
 	const existingUsers = await getUserByUsername(values.username);
 
 	if (existingUsers.length === 0) {
-		throw new Error("Invalid username or password");
+		return {
+			error: "Invalid username or password",
+		};
 	}
 
 	const existingUser = existingUsers[0];
@@ -25,7 +27,9 @@ export async function action(values: Schema): Promise<ActionResult> {
 	// Potentially don't use bcrypt.compare() because we want to always hash the password
 	// Attackers would otherwise use the timing to determine whether a user exists
 	if (!(await bcrypt.compare(values.password, existingUser.hashedPassword))) {
-		throw new Error("Invalid username or password");
+		return {
+			error: "Invalid username or password",
+		};
 	}
 
 	const session = await lucia.createSession(existingUser.id, {});

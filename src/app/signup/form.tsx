@@ -47,7 +47,13 @@ export const SignupForm = () => {
 
 	const onSubmit = (values: Schema) => {
 		action(values)
-			.then(() => toast.success("Account created successfully"))
+			.then((response) => {
+				if (response.error) {
+					return toast.error(response.error);
+				} else {
+					toast.success("Account created successfully");
+				}
+			})
 			.catch((err) => toast.error(err.message));
 	};
 

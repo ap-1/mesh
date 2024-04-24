@@ -35,7 +35,13 @@ export const SigninForm = () => {
 
 	const onSubmit = (values: Schema) => {
 		action(values)
-			.then(() => toast.success("Signed in successfully"))
+			.then((response) => {
+				if (response.error) {
+					return toast.error(response.error);
+				} else {
+					toast.success("Signed in successfully");
+				}
+			})
 			.catch((err) => toast.error(err.message));
 	};
 

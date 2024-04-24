@@ -21,7 +21,9 @@ export async function action(values: Schema): Promise<ActionResult> {
 	const existingUsers = await getUserByUsername(values.username);
 
 	if (existingUsers.length > 0) {
-		throw new Error("User already exists");
+		return {
+			error: "User already exists",
+		};
 	}
 
 	await createUser({
