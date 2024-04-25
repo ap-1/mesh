@@ -232,8 +232,8 @@ export const FileUploader = (props: FileUploaderProps) => {
 								</div>
 								<div className="space-y-px">
 									<p className="font-medium text-muted-foreground">
-										Drag and drop an image here, or click to
-										select one
+										Drag and drop, paste, or click to select
+										an image
 									</p>
 									<p className="text-sm text-muted-foreground/70">
 										You can upload
