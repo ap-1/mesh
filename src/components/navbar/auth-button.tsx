@@ -8,10 +8,7 @@ interface AuthButtonProps {
 	handleAuthClick: () => Promise<void>;
 }
 
-export const AuthButton = async ({
-	user,
-	handleAuthClick,
-}: AuthButtonProps) => {
+export const AuthButton = ({ user, handleAuthClick }: AuthButtonProps) => {
 	return (
 		<form action={handleAuthClick}>
 			<Button>{user ? "Logout" : "Sign in"}</Button>
