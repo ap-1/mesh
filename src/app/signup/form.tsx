@@ -22,9 +22,9 @@ const schema = z.object({
 		.string()
 		.min(3, { message: "Username must be at least 3 characters" })
 		.max(31, { message: "Username may not be longer than 31 characters" })
-		.regex(/^[a-z0-9_-]+$/, {
+		.regex(/^[a-zA-Z0-9._-]+$/, {
 			message:
-				"Username must only consist of lowercase letters, 0-9, -, and _",
+				"Username may only consist of alphanumeric characters, periods, -, and _",
 		}),
 	password: z
 		.string()
@@ -48,11 +48,11 @@ export const SignupForm = () => {
 	const onSubmit = (values: Schema) => {
 		action(values)
 			.then((response) => {
-				if (response && response.error) {
+				if (response?.error) {
 					return toast.error(response.error);
-				} else {
-					toast.success("Account created successfully");
 				}
+
+				toast.success("Account created successfully");
 			})
 			.catch((err) => toast.error(err.message));
 	};
