@@ -1,13 +1,12 @@
 "use client";
 
-import { z } from "zod";
+import { action } from "@/app/signin/action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { action } from "@/app/signin/action";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
 	Form,
 	FormControl,
@@ -16,6 +15,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const schema = z.object({
 	username: z.string().min(1, { message: "Please enter your username" }),
@@ -36,11 +36,11 @@ export const SigninForm = () => {
 	const onSubmit = (values: Schema) => {
 		action(values)
 			.then((response) => {
-				if (response && response.error) {
+				if (response?.error) {
 					return toast.error(response.error);
-				} else {
-					toast.success("Signed in successfully");
 				}
+
+				toast.success("Signed in successfully");
 			})
 			.catch((err) => toast.error(err.message));
 	};
