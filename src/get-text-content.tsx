@@ -75,7 +75,7 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 				]);
 
 				const imageId = generateIdFromEntropySize(16);
-				await createImage({
+				createImage({
 					id: imageId,
 					userId: user.id,
 					text: content,
@@ -90,7 +90,6 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 			});
 
 			return (
-				<div className="flex flex-row">
 					<p>
 						{halves.map((word, i) => (
 							<span key={i}>
@@ -98,12 +97,10 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 								{word[1]}{" "}
 							</span>
 						))}
+						{done || (
+							<LoaderCircleIcon className="inline animate-spin ml-2 my-auto size-4" />
+						)}
 					</p>
-
-					{done || (
-						<LoaderCircleIcon className="animate-spin ml-2 my-auto size-4" />
-					)}
-				</div>
 			);
 		},
 	});
