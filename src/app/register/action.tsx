@@ -26,7 +26,7 @@ export async function action(values: Schema): Promise<ActionResult> {
 		};
 	}
 
-	await createUser({
+	createUser({
 		id: userId,
 		username: values.username,
 		hashedPassword,
