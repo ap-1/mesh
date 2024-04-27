@@ -1,0 +1,13 @@
+{
+  "formatter": {
+    "indentStyle": "tab",
+    "indentWidth": 4,
+    "ignore": ["src/db/migrations"]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  }
+}
