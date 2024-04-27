@@ -19,7 +19,7 @@ export const Navbar = async () => {
 		if (user) {
 			await logout();
 		} else {
-			redirect("/signin");
+			redirect("/login");
 		}
 	};
 

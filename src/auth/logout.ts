@@ -27,5 +27,5 @@ export async function logout(): Promise<ActionResult> {
 		sessionCookie.attributes
 	);
 
-	return redirect("/signin");
+	return redirect("/login");
 }

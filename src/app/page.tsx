@@ -7,7 +7,7 @@ import { Content } from "@/components/content";
 export default async function Home() {
 	const { user } = await validateRequest();
 	if (!user) {
-		redirect("/signin");
+		redirect("/login");
 	}
 
 	return (
