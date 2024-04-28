@@ -31,6 +31,10 @@ interface UIStateItem {
 const initialAIState: AIStateItem[] = [];
 const initialUIState: UIStateItem = null!;
 
+const Loading = () => {
+	return <LoaderCircleIcon className="inline animate-spin ml-2 my-auto size-4" />
+}
+
 async function getTextContent(base64_image: string): Promise<UIStateItem> {
 	"use server";
 
@@ -64,6 +68,7 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 		model: "gpt-4-turbo",
 		provider: openai,
 		messages: [...aiState.get()],
+		initial: <Loading />,
 		text: async ({ content, done }) => {
 			if (done) {
 				aiState.done([
@@ -98,7 +103,7 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 							</span>
 						))}
 						{done || (
-							<LoaderCircleIcon className="inline animate-spin ml-2 my-auto size-4" />
+							<Loading />
 						)}
 					</p>
 			);
