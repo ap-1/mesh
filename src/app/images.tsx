@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { useMemo } from "react";
 import { redirect } from "next/navigation";
+import { useMemo } from "react";
 
 import { deleteImage, getImagesByUserId } from "@/db/adapter";
 import type { Image as ImageType, User } from "@/db/schema";
