@@ -22,6 +22,8 @@ export const images = sqliteTable("image", {
 		.references(() => users.id),
 });
 
+export type Image = typeof images.$inferSelect;
+
 export const sessions = sqliteTable("session", {
 	id: text("id").notNull().primaryKey(),
 	expiresAt: integer("expires_at").notNull(),

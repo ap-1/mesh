@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 import { Toaster } from "sonner";
 
-import { AI } from "@/get-text-content";
+import { AI } from "@/lib/get-text-content";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 

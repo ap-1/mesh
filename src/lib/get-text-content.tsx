@@ -6,7 +6,9 @@ import { generateIdFromEntropySize } from "lucia";
 import { validateRequest } from "@/auth/validate-request";
 import { createImage } from "@/db/adapter";
 
+import { apply } from "@/lib/bionic-reading";
 import { LoaderCircleIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 const openai = new OpenAI({
 	apiKey: env.OPENAI_API_KEY,
@@ -25,7 +27,7 @@ type AIStateItem =
 
 interface UIStateItem {
 	id: number;
-	display: React.ReactNode;
+	display: ReactNode;
 }
 
 const initialAIState: AIStateItem[] = [];
@@ -88,20 +90,9 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 				});
 			}
 
-			const words = content.split(" ");
-			const halves = words.map((word) => {
-				const half = Math.ceil(word.length / 2);
-				return [word.slice(0, half), word.slice(half)];
-			});
-
 			return (
 					<p>
-						{halves.map((word, i) => (
-							<span key={i}>
-								<span className="font-bold">{word[0]}</span>
-								{word[1]}{" "}
-							</span>
-						))}
+						{apply(content)}
 						{done || (
 							<Loading />
 						)}

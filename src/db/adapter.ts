@@ -1,8 +1,8 @@
+import { createClient } from "@libsql/client";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
 
-import { sessions, users, images } from "@/db/schema";
+import { images, sessions, users } from "@/db/schema";
 import { env } from "@/env";
 import { eq } from "drizzle-orm";
 
@@ -26,3 +26,11 @@ export const getUserByUsername = (username: string) => {
 export const createImage = (image: typeof images.$inferInsert) => {
 	db.insert(images).values(image).all();
 };
+
+export const getImagesByUserId = (userId: string) => {
+	return db.select().from(images).where(eq(images.userId, userId)).all();
+}
+
+export const deleteImage = (imageId: string) => {
+	db.delete(images).where(eq(images.id, imageId)).all();
+}

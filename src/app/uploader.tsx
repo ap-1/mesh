@@ -1,7 +1,7 @@
 "use client";
 
 import { useUIState, useActions } from "ai/rsc";
-import type { AI } from "@/get-text-content";
+import type { AI } from "@/lib/get-text-content";
 
 import { toast } from "sonner";
 import { useCallback } from "react";
