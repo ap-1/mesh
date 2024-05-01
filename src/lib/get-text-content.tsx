@@ -1,16 +1,14 @@
-import { OpenAI } from "openai";
-import { createAI, getMutableAIState, render } from "ai/rsc";
 import { env } from "@/env";
+import { createAI, getMutableAIState, render } from "ai/rsc";
+import { OpenAI } from "openai";
 
-import { generateIdFromEntropySize } from "lucia";
 import { validateRequest } from "@/auth/validate-request";
 import { createImage } from "@/db/adapter";
+import { generateIdFromEntropySize } from "lucia";
 
 import { apply } from "@/lib/bionic-reading";
 import { LoaderCircleIcon } from "lucide-react";
 import type { ReactNode } from "react";
-
-export const maxDuration = 300;
 
 const openai = new OpenAI({
 	apiKey: env.OPENAI_API_KEY,
@@ -18,14 +16,14 @@ const openai = new OpenAI({
 
 type AIStateItem =
 	| {
-			readonly role: "user" | "assistant" | "system";
-			readonly content: any;
-	  }
+		readonly role: "user" | "assistant" | "system";
+		readonly content: any;
+	}
 	| {
-			readonly role: "function";
-			readonly content: string;
-			readonly name: string;
-	  };
+		readonly role: "function";
+		readonly content: string;
+		readonly name: string;
+	};
 
 interface UIStateItem {
 	id: number;
@@ -93,12 +91,12 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 			}
 
 			return (
-					<p>
-						{apply(content)}
-						{done || (
-							<Loading />
-						)}
-					</p>
+				<p>
+					{apply(content)}
+					{done || (
+						<Loading />
+					)}
+				</p>
 			);
 		},
 	});
