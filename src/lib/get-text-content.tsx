@@ -10,6 +10,8 @@ import { apply } from "@/lib/bionic-reading";
 import { LoaderCircleIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
+export const maxDuration = 300;
+
 const openai = new OpenAI({
 	apiKey: env.OPENAI_API_KEY,
 });
