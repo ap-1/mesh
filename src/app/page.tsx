@@ -5,6 +5,8 @@ import { Images } from "@/app/images";
 import { validateRequest } from "@/auth/validate-request";
 import { Content } from "@/components/content";
 
+export const maxDuration = 300;
+
 export default async function Home() {
 	const { user } = await validateRequest();
 	if (!user) {
