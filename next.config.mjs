@@ -1,4 +1,4 @@
-import MillionLint from "@million/lint";
+// import MillionLint from "@million/lint";
 // import million from "million/compiler";
 
 import { fileURLToPath } from "url";
@@ -12,13 +12,16 @@ const nextConfig = {
 	reactStrictMode: true,
 };
 
-const millionConfig = {
-	auto: true,
-};
+export default nextConfig;
 
-export default MillionLint.next({
-	rsc: true,
-})(nextConfig, millionConfig);
+// Million Lint is only supported on vscode
+// const millionConfig = {
+// 	auto: true,
+// };
+
+// export default MillionLint.next({
+// 	rsc: true,
+// })(nextConfig, millionConfig);
 
 // Running both Million Lint and million breaks ai/rsc
 // (million.next(nextConfig, millionConfig));
