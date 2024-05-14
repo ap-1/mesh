@@ -67,7 +67,7 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 	]);
 
 	const ui = render({
-		model: "gpt-4-turbo",
+		model: "gpt-4o",
 		provider: openai,
 		messages: [...aiState.get()],
 		initial: <Loading />,
