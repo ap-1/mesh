@@ -1,14 +1,32 @@
-export const apply = (content: string) => {
-	const words = content.split(" ");
-	const halves = words.map((word) => {
-		const half = Math.ceil(word.length / 2);
-		return [word.slice(0, half), word.slice(half)];
-	});
+import { franc } from "franc";
 
-	return halves.map((word, i) => (
-		<span key={i}>
-			<span className="font-bold">{word[0]}</span>
-			{word[1]}{" "}
-		</span>
-	));
+export const apply = (content: string) => {
+	let code = franc(content);
+	if (code === "und") {
+		code = "en";
+	}
+
+	const words = new Intl.Segmenter(code, { granularity: "word" });
+	const segments = Array.from(words.segment(content));
+
+	return segments.map(({ isWordLike, segment }, i) => {
+		if (isWordLike) {
+			const graphemes = new Intl.Segmenter(code, { granularity: "grapheme" });
+			const subsegments = Array.from(graphemes.segment(segment))
+				.map(({ segment }) => segment);
+
+			const half = Math.ceil(subsegments.length / 2);
+
+			return (
+				<span key={i}>
+					<span className="font-bold">
+						{subsegments.slice(0, half).join("")}
+					</span>
+					{subsegments.slice(half).join("")}
+				</span>
+			);
+		}
+
+		return <span key={i}>{segment}</span>;
+	})
 }
