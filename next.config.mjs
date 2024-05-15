@@ -11,6 +11,7 @@ jiti("./src/env");
 const nextConfig = {
 	reactStrictMode: true,
 	experimental: {
+		instrumentationHook: true,
 		serverActions: {
 			bodySizeLimit: "15mb",
 		}

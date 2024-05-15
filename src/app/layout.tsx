@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
 
 import { AI } from "@/lib/get-text-content";
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<AI>{children}</AI>
 					<Toaster />
 				</ThemeProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
