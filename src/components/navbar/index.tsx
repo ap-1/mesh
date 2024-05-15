@@ -28,7 +28,7 @@ export const Navbar = async () => {
 			<Link href="/" className="flex flex-row my-auto gap-x-4">
 				<BrainCircuitIcon className="my-auto size-8" />
 				<p className="hidden text-2xl font-bold sm:block">
-					Bionic Reading
+					Mesh
 				</p>
 			</Link>
 
@@ -36,7 +36,7 @@ export const Navbar = async () => {
 				<ThemeSwitcher />
 
 				<Link
-					href="https://github.com/ap-1/bionic-reading"
+					href="https://github.com/ap-1/mesh"
 					target="_blank"
 				>
 					<Button variant="ghost" size="icon">

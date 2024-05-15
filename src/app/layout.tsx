@@ -10,8 +10,8 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "Bionic Reading",
-	description: "Apply bionic reading to your documents.",
+	title: "Mesh",
+	description: "Apply Bionic Reading® to your images.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
