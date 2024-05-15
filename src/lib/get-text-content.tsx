@@ -1,6 +1,6 @@
 import { env } from "@/env";
-import { createAI, getMutableAIState, render } from "ai/rsc";
-import { OpenAI } from "openai";
+import { createOpenAI } from "@ai-sdk/openai";
+import { streamUI, createAI } from "ai/rsc";
 
 import { validateRequest } from "@/auth/validate-request";
 import { createImage } from "@/db/adapter";
@@ -10,7 +10,7 @@ import { apply } from "@/lib/bionic-reading";
 import { LoaderCircleIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
-const openai = new OpenAI({
+const openai = createOpenAI({
 	apiKey: env.OPENAI_API_KEY,
 });
 
@@ -39,9 +39,7 @@ const Loading = () => {
 
 async function getTextContent(base64_image: string): Promise<UIStateItem> {
 	"use server";
-
 	const { user } = await validateRequest();
-	const aiState = getMutableAIState<typeof AI>();
 
 	if (!user) {
 		return {
@@ -50,37 +48,26 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 		};
 	}
 
-	aiState.update([
-		{
-			role: "user",
-			content: [
-				{
-					type: "text",
-					text: "Please transcribe the text in this image.",
-				},
-				{
-					type: "image_url",
-					image_url: { url: base64_image },
-				},
-			],
-		},
-	]);
-
-	const ui = render({
-		model: "gpt-4o",
-		provider: openai,
-		messages: [...aiState.get()],
+	const result = await streamUI({
+		model: openai("gpt-4o", { user: user.id }),
+		messages: [
+			{
+				role: "user",
+				content: [
+					{
+						type: "text",
+						text: "Please transcribe the text in this image.",
+					},
+					{
+						type: "image",
+						image: base64_image.split("base64,")[1],
+					},
+				],
+			}
+		],
 		initial: <Loading />,
 		text: async ({ content, done }) => {
 			if (done) {
-				aiState.done([
-					...aiState.get(),
-					{
-						role: "assistant",
-						content,
-					},
-				]);
-
 				const imageId = generateIdFromEntropySize(16);
 				createImage({
 					id: imageId,
@@ -99,11 +86,11 @@ async function getTextContent(base64_image: string): Promise<UIStateItem> {
 				</p>
 			);
 		},
-	});
+	})
 
 	return {
 		id: Date.now(),
-		display: ui,
+		display: result.value,
 	};
 }
 
