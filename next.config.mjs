@@ -11,8 +11,9 @@ jiti("./src/env");
 const nextConfig = {
 	reactStrictMode: true,
 	experimental: {
+		serverComponentsExternalPackages: ["cldpre"],
 		serverActions: {
-			bodySizeLimit: "5mb",
+			bodySizeLimit: "15mb",
 		}
 	}
 };
