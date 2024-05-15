@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mesh
 
-## Getting Started
+Mesh helps users read and comprehend text more effectively. It uses a technique called Bionic Reading® to guide users through text in a way that leverages the brain's natural processing capabilities.
 
-First, run the development server:
+A working prototype is available [here]().
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Frontend**: React, Tailwind CSS, shadcn-ui
+- **Backend**: Next.js, TypeScript
+- **Database**: Drizzle ORM, Turso
+- **Authentication**: Lucia, Oslo
+- **Deployment**: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Credits
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+"Waypoints" logo sourced from [Lucide](https://lucide.dev/icons/waypoints).
 
-## Learn More
+This project incorporates elements inspired by the Bionic Reading® method developed by BRCG Casutt GmbH. While not directly affiliated with Bionic Reading AG or BRCG Casutt GmbH, we acknowledge the innovative concepts and principles behind their work, which have influenced our project's design.
 
-To learn more about Next.js, take a look at the following resources:
+For more information about the Bionic Reading method and its creators, please visit [Bionic Reading](https://bionic-reading.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Mesh uses the vision capabilities of OpenAI's `gpt-4o` to extract text from images. Although it has been extremely reliable in testing, there is still a possibility of errors or hallucinations, particularly with complex or distorted images. Users are advised to exercise caution and verify the accuracy of transcribed text, especially for critical purposes.
