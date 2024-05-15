@@ -45,7 +45,7 @@ export const Uploader = () => {
 
 	return (
 		<>
-			<FileUploader maxSize={1024 * 1024 * 4} onUpload={onUpload} />
+			<FileUploader maxSize={1024 * 1024 * 10} onUpload={onUpload} />
 			{response?.display}
 		</>
 	);
