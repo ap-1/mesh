@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { BrainCircuitIcon } from "lucide-react";
+import { WaypointsIcon } from "lucide-react";
 
 import { validateRequest } from "@/auth/validate-request";
 import { logout } from "@/auth/logout";
@@ -26,7 +26,7 @@ export const Navbar = async () => {
 	return (
 		<Content as="nav" className="flex flex-row justify-between h-24">
 			<Link href="/" className="flex flex-row my-auto gap-x-4">
-				<BrainCircuitIcon className="my-auto size-8" />
+				<WaypointsIcon className="my-auto size-8" />
 				<p className="hidden text-2xl font-bold sm:block">
 					Mesh
 				</p>
